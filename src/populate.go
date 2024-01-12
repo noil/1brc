@@ -423,7 +423,7 @@ var weatherStation []string = []string{
 	"Zürich",
 }
 
-func fill() {
+func populate() {
 	countStations := len(weatherStation)
 
 	file, err := os.Create("./measurements.txt")

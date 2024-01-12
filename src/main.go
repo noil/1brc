@@ -17,19 +17,19 @@ const (
 )
 
 func main() {
-	// fill()
+	// populate()
 	parallel(os.Args[1], true, runtime.NumCPU()*2, _chunkSize)
 }
 
 const (
-	fillCommand     string = "fill"
+	populateCommand string = "populate"
 	parallelCommand string = "parallel"
 )
 
 func run(command string, filePath string, debug bool, countWorkers int, sizeChunk int) {
 	switch command {
-	case fillCommand:
-		fill()
+	case populateCommand:
+		populate()
 	case parallelCommand:
 		parallel(filePath, debug, countWorkers, sizeChunk)
 	default:
@@ -79,7 +79,7 @@ func parallel(filePath string, debug bool, countWorkers int, chunkSize int) {
 	wg.Add(chunks)
 	// ----------------------------------------
 	stations := make(map[string]*StationStats, 512)
-	names := make([]string, 0, 1024)
+	names := make([]string, 0, 512)
 	statsCh := make(chan map[string]*StationStats, chunks)
 	statsWg := sync.WaitGroup{}
 	statsWg.Add(chunks)
